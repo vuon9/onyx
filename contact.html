@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ONYX — Contact</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0a;--surface:#141414;--gold:#c9a96e;--gold-dim:#8a7a52;--gold-bright:#e8d5a3;--text:#f5f5f5;--muted:#888;--border:#2a2a2a;--radius:12px;--ease:cubic-bezier(.25,.46,.45,.94)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--gold-dim);border-radius:4px}
+
+header{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.2rem 2rem;background:rgba(10,10,10,.65);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(201,169,110,.12);transition:padding .3s var(--ease)}
+header.scrolled{padding:.8rem 2rem;background:rgba(10,10,10,.92)}
+.nav-container{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:'Playfair Display',serif;font-weight:700;font-size:1.8rem;color:var(--gold);letter-spacing:.35em;text-decoration:none;position:relative}
+.logo::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--gold);transition:width .4s var(--ease)}
+.logo:hover::after{width:100%}
+nav ul{display:flex;gap:2.5rem;list-style:none}
+nav a{color:var(--text);text-decoration:none;font-size:.85rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;position:relative;padding-bottom:4px;transition:color .3s}
+nav a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--gold);transition:width .35s var(--ease)}
+nav a:hover{color:var(--gold)}nav a:hover::after{width:100%}
+
+/* HERO — gold pulse glow */
+.hero{padding:10rem 2rem 2rem;max-width:1400px;margin:0 auto;text-align:center;position:relative}
+.hero .eyebrow{font-size:.8rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;font-weight:500}
+.hero h1{font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(2.5rem,6vw,4rem);background:linear-gradient(180deg,#f5f5f5 0%,#c9a96e 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:1rem}
+.pulse-line{width:100px;height:2px;margin:1.5rem auto;background:var(--gold);position:relative}
+.pulse-line::after{content:'';position:absolute;inset:-3px;background:var(--gold);border-radius:2px;filter:blur(6px);opacity:.5;animation:pulse 2s infinite ease-in-out}
+@keyframes pulse{0%,100%{opacity:.3;transform:scale(.8)}50%{opacity:.6;transform:scale(1.2)}}
+.hero p{font-size:1.1rem;color:var(--muted);max-width:500px;margin:0 auto}
+
+.contact-section{max-width:1100px;margin:0 auto;padding:2rem 2rem 4rem;display:grid;grid-template-columns:1fr 1.2fr;gap:3rem}
+.info-panel{display:flex;flex-direction:column;gap:1.5rem}
+.info-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.8rem;transition:all .3s var(--ease)}
+.info-card:hover{border-color:var(--gold-dim)}
+.info-card .icon{font-size:1.4rem;color:var(--gold);margin-bottom:.5rem}
+.info-card h3{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:600;margin-bottom:.4rem}
+.info-card p{color:var(--muted);font-size:.88rem;line-height:1.6}
+.info-card a{color:var(--gold-bright);text-decoration:none}
+
+.form-panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2.5rem}
+.form-panel h2{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:600;margin-bottom:.4rem}
+.form-panel .form-sub{color:var(--muted);font-size:.88rem;margin-bottom:1.8rem}
+.form-group{margin-bottom:1.3rem}
+.form-group label{display:block;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:.4rem}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:.8rem 1.1rem;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-family:'Inter',sans-serif;font-size:.88rem;transition:all .3s}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,169,110,.12)}
+.form-group textarea{resize:vertical;min-height:110px}
+.form-group select{cursor:pointer}
+.form-group select option{background:var(--bg)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.submit-btn{width:100%;padding:1rem;background:transparent;border:1px solid var(--gold);color:var(--gold);font-family:'Inter',sans-serif;font-size:.82rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;border-radius:var(--radius);cursor:pointer;position:relative;overflow:hidden;transition:color .4s var(--ease);margin-top:.3rem}
+.submit-btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:var(--gold);transition:left .4s var(--ease);z-index:-1}
+.submit-btn:hover{color:var(--bg)}.submit-btn:hover::before{left:0}
+.submit-btn span{position:relative;z-index:1}
+
+.hours{max-width:1100px;margin:0 auto;padding:1rem 2rem 4rem}
+.hours h2{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:600;margin-bottom:1.3rem;text-align:center}
+.hours-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1rem;max-width:560px;margin:0 auto}
+.hours-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.1rem;text-align:center;transition:all .3s}
+.hours-item:hover{border-color:var(--gold-dim);transform:translateY(-3px)}
+.hours-day{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:.2rem}
+.hours-time{font-size:.82rem;color:var(--text)}
+.hours-closed{color:var(--muted);font-style:italic}
+
+footer{border-top:1px solid rgba(201,169,110,.15);padding:3rem 2rem 2rem;margin-top:1rem}
+.footer-content{max-width:1400px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:2rem}
+.footer-brand{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--gold);letter-spacing:.3em}
+.footer-links{display:flex;gap:2rem;list-style:none}
+.footer-links a{color:var(--muted);text-decoration:none;font-size:.8rem;letter-spacing:.15em;text-transform:uppercase;transition:color .3s}
+.footer-links a:hover{color:var(--gold)}
+.footer-copy{text-align:center;color:var(--muted);font-size:.75rem;margin-top:2rem;padding-top:2rem;border-top:1px solid var(--border);max-width:1400px;margin-left:auto;margin-right:auto}
+
+@media(max-width:768px){nav ul{display:none}.contact-section{grid-template-columns:1fr}.form-row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header id="header">
+  <div class="nav-container">
+    <a href="index.html" class="logo">ONYX</a>
+    <nav><ul>
+      <li><a href="index.html#collection">Collection</a></li>
+      <li><a href="brands.html">Maisons</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="journey.html">Journey</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul></nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="eyebrow">Get in Touch</div>
+  <h1>Begin Your Journey</h1>
+  <div class="pulse-line"></div>
+  <p>Whether you're seeking your first timepiece or adding to a collection, we're here to guide you.</p>
+</section>
+
+<section class="contact-section">
+  <div class="info-panel">
+    <div class="info-card"><div class="icon">✦</div><h3>Private Consultation</h3><p>Schedule a one-on-one session with our horology experts. In-person or virtual, by appointment only.</p></div>
+    <div class="info-card"><div class="icon">✉</div><h3>Email</h3><p>For inquiries about pieces, acquisitions, or general questions.</p><p style="margin-top:.4rem"><a href="#" onclick="return false">curator@onyx.test</a></p></div>
+    <div class="info-card"><div class="icon">⚲</div><h3>Showroom</h3><p>By appointment only.<br>Ho Chi Minh City, Vietnam<br>Saigon Pearl, District 2</p></div>
+    <div class="info-card"><div class="icon">♫</div><h3>Follow</h3><p><a href="#" onclick="return false">Instagram</a> · <a href="#" onclick="return false">YouTube</a> · <a href="#" onclick="return false">Telegram</a></p></div>
+  </div>
+  <div class="form-panel">
+    <h2>Send a Message</h2>
+    <p class="form-sub">We respond within 24 hours.</p>
+    <form onsubmit="event.preventDefault();this.querySelector('.submit-btn span').textContent='✓ Message Sent'">
+      <div class="form-row">
+        <div class="form-group"><label>First Name</label><input type="text" placeholder="Vuong" required></div>
+        <div class="form-group"><label>Last Name</label><input type="text" placeholder="Bui" required></div>
+      </div>
+      <div class="form-group"><label>Email</label><input type="email" placeholder="your@email.com" required></div>
+      <div class="form-group"><label>Phone (optional)</label><input type="tel" placeholder="+84 ..."></div>
+      <div class="form-group"><label>I'm interested in</label><select><option>General inquiry</option><option>Buying a specific piece</option><option>Selling / consignment</option><option>Private consultation</option><option>Press / partnership</option></select></div>
+      <div class="form-group"><label>Message</label><textarea placeholder="Tell us what you're looking for..." required></textarea></div>
+      <button type="submit" class="submit-btn"><span>Send Message</span></button>
+    </form>
+  </div>
+</section>
+
+<section class="hours">
+  <h2>Consultation Hours</h2>
+  <div class="hours-grid">
+    <div class="hours-item"><div class="hours-day">Mon–Fri</div><div class="hours-time">10:00 – 18:00</div></div>
+    <div class="hours-item"><div class="hours-day">Saturday</div><div class="hours-time">10:00 – 16:00</div></div>
+    <div class="hours-item"><div class="hours-day">Sunday</div><div class="hours-time hours-closed">Closed</div></div>
+    <div class="hours-item"><div class="hours-day">Holidays</div><div class="hours-time hours-closed">By appointment</div></div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-content">
+    <div class="footer-brand">ONYX</div>
+    <ul class="footer-links">
+      <li><a href="index.html">Collection</a></li>
+      <li><a href="brands.html">Maisons</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="journey.html">Journey</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+  <div class="footer-copy">© 2026 ONYX. Curated horology for the discerning. All brand names and trademarks belong to their respective owners.</div>
+</footer>
+
+<script>
+const header=document.getElementById('header');
+window.addEventListener('scroll',()=>{if(window.scrollY>60)header.classList.add('scrolled');else header.classList.remove('scrolled')});
+</script>
+</body>
+</html>

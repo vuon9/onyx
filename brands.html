@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ONYX — The Maisons</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0a;--surface:#141414;--gold:#c9a96e;--gold-dim:#8a7a52;--gold-bright:#e8d5a3;--text:#f5f5f5;--muted:#888;--border:#2a2a2a;--radius:12px;--ease:cubic-bezier(.25,.46,.45,.94)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--gold-dim);border-radius:4px}
+
+header{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.2rem 2rem;background:rgba(10,10,10,.65);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(201,169,110,.12);transition:padding .3s var(--ease)}
+header.scrolled{padding:.8rem 2rem;background:rgba(10,10,10,.92)}
+.nav-container{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:'Playfair Display',serif;font-weight:700;font-size:1.8rem;color:var(--gold);letter-spacing:.35em;text-decoration:none;position:relative}
+.logo::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--gold);transition:width .4s var(--ease)}
+.logo:hover::after{width:100%}
+nav ul{display:flex;gap:2.5rem;list-style:none}
+nav a{color:var(--text);text-decoration:none;font-size:.85rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;position:relative;padding-bottom:4px;transition:color .3s}
+nav a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--gold);transition:width .35s var(--ease)}
+nav a:hover{color:var(--gold)}nav a:hover::after{width:100%}
+
+/* HERO — unique gold sweep effect */
+.hero{padding:10rem 2rem 4rem;max-width:1400px;margin:0 auto;text-align:center;position:relative;overflow:hidden}
+.hero .eyebrow{font-size:.8rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;font-weight:500}
+.hero h1{font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(2.5rem,6vw,4rem);background:linear-gradient(180deg,#f5f5f5 0%,#c9a96e 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:1rem}
+.hero p{font-size:1.1rem;color:var(--muted);max-width:500px;margin:0 auto}
+/* Animated gold sweep line */
+.sweep-line{width:100px;height:2px;margin:1.5rem auto;background:linear-gradient(90deg,transparent,var(--gold),transparent);position:relative;overflow:hidden}
+.sweep-line::after{content:'';position:absolute;top:0;left:-50%;width:50%;height:100%;background:linear-gradient(90deg,transparent,#fff,transparent);animation:sweep 3s infinite ease-in-out}
+@keyframes sweep{0%{left:-50%}100%{left:100%}}
+/* Rotating gear */
+.gear-icon{font-size:2rem;color:var(--gold-dim);margin:1rem auto;display:inline-block;animation:rotate 8s infinite linear}
+@keyframes rotate{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
+.brands{padding:4rem 2rem;max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem}
+.brand-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;transition:all .4s var(--ease);cursor:pointer;color:inherit;display:block}
+.brand-card:hover{transform:translateY(-6px);border-color:var(--gold-dim);box-shadow:0 16px 40px rgba(0,0,0,.4),0 0 20px rgba(201,169,110,.08)}
+.brand-card h3{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:600;margin-bottom:.75rem;color:var(--text)}
+.brand-card .meta{display:flex;gap:1rem;margin-bottom:.75rem}
+.brand-card .year{color:var(--gold);font-weight:600;font-size:.85rem;letter-spacing:.05em}
+.brand-card .country{color:var(--gold-dim);font-weight:500;font-size:.85rem}
+.brand-card .heritage{color:var(--muted);font-size:.9rem;line-height:1.7;margin-bottom:.75rem}
+.brand-card .model{font-style:italic;font-size:.9rem;color:var(--gold-bright)}
+.brand-card .model::before{content:'Signature: ';font-style:normal;color:var(--muted);font-size:.8rem}
+.brand-card .view-detail{font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-top:.75rem;opacity:0;transition:opacity .3s}
+.brand-card:hover .view-detail{opacity:1}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;z-index:200;background:rgba(5,5,5,.88);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:2rem;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
+.modal-overlay.active{opacity:1;visibility:visible}
+.modal{background:var(--surface);border:1px solid var(--border);border-radius:16px;max-width:640px;width:100%;max-height:85vh;overflow-y:auto;transform:scale(.92);transition:transform .4s var(--ease);position:relative}
+.modal-overlay.active .modal{transform:scale(1)}
+.modal-close{position:absolute;top:1rem;right:1rem;width:40px;height:40px;background:rgba(10,10,10,.6);border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--muted);font-size:1.2rem;z-index:5;transition:all .3s var(--ease)}
+.modal-close:hover{color:var(--gold);border-color:var(--gold);transform:rotate(90deg)}
+.modal-body{padding:2.5rem}
+.modal-brand-name{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;margin-bottom:.25rem}
+.modal-brand-meta{display:flex;gap:1.5rem;margin-bottom:1.5rem}
+.modal-brand-meta .year{color:var(--gold);font-weight:600}
+.modal-brand-meta .country{color:var(--gold-dim)}
+.modal-brand-desc{color:var(--muted);line-height:1.8;margin-bottom:1.5rem}
+.modal-brand-models{padding-top:1.5rem;border-top:1px solid var(--border)}
+.modal-brand-models h4{font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.75rem}
+.modal-brand-models ul{list-style:none;display:flex;flex-direction:column;gap:.5rem}
+.modal-brand-models li{font-size:.9rem;color:var(--text);padding-left:1rem;position:relative}
+.modal-brand-models li::before{content:'◇';position:absolute;left:0;color:var(--gold-dim)}
+.modal-brand-milestones{padding-top:1.5rem;margin-top:1.5rem;border-top:1px solid var(--border)}
+.modal-brand-milestones h4{font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.75rem}
+.modal-brand-milestones .milestone{display:flex;gap:1rem;margin-bottom:.5rem}
+.modal-brand-milestones .year{color:var(--gold);font-weight:600;min-width:50px;font-size:.85rem}
+.modal-brand-milestones .event{color:var(--muted);font-size:.85rem;line-height:1.6}
+
+footer{border-top:1px solid rgba(201,169,110,.15);padding:3rem 2rem 2rem;margin-top:4rem}
+.footer-content{max-width:1400px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:2rem}
+.footer-brand{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--gold);letter-spacing:.3em}
+.footer-links{display:flex;gap:2rem;list-style:none}
+.footer-links a{color:var(--muted);text-decoration:none;font-size:.8rem;letter-spacing:.15em;text-transform:uppercase;transition:color .3s}
+.footer-links a:hover{color:var(--gold)}
+.footer-copy{text-align:center;color:var(--muted);font-size:.75rem;margin-top:2rem;padding-top:2rem;border-top:1px solid var(--border);max-width:1400px;margin-left:auto;margin-right:auto}
+
+@media(max-width:768px){nav ul{display:none}.brands{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header id="header">
+  <div class="nav-container">
+    <a href="index.html" class="logo">ONYX</a>
+    <nav><ul>
+      <li><a href="index.html#collection">Collection</a></li>
+      <li><a href="brands.html">Maisons</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="journey.html">Journey</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul></nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="eyebrow">Discover the Houses</div>
+  <h1>The Maisons</h1>
+  <div class="sweep-line"></div>
+  <p>Nine legendary houses. Three centuries of craftsmanship. Discover the stories behind the world's most revered watchmakers.</p>
+  <div class="gear-icon">⚙</div>
+</section>
+
+<section class="brands" id="brands"></section>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <div class="modal-close" id="modalClose">✕</div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-content">
+    <div class="footer-brand">ONYX</div>
+    <ul class="footer-links">
+      <li><a href="index.html">Collection</a></li>
+      <li><a href="brands.html">Maisons</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="journey.html">Journey</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+  <div class="footer-copy">© 2026 ONYX. Curated horology for the discerning. All brand names and trademarks belong to their respective owners.</div>
+</footer>
+
+<script>
+const brands=[
+  {name:"Rolex",year:"1905",country:"Switzerland",heritage:"Founded by Hans Wilsdorf and Alfred Davis in London, Rolex moved to Geneva in 1919 and became synonymous with precision, durability, and luxury. The brand pioneered the first waterproof watch (Oyster, 1926) and the first automatic winding with a rotor (1931).",
+   models:["Submariner","Datejust","Daytona","GMT-Master II","Day-Date"],
+   milestones:[["1905","Founded in London"],["1926","Oyster — first waterproof case"],["1931","Perpetual rotor self-winding"],["1953","Submariner — first dive watch"],["1965","Daytona chronograph launched"]],
+   signature:"Submariner"},
+  {name:"Patek Philippe",year:"1839",country:"Switzerland",heritage:"Established by Antoine Norbert de Patek and Adrien Philippe in Geneva. The pinnacle of haute horlogerie, known for grand complications, minute repeaters, and the most expensive watches ever sold at auction. The Nautilus (1976) became the ultimate grail watch.",
+   models:["Nautilus","Calatrava","Aquanaut","Grand Complications","Twenty-4"],
+   milestones:[["1839","Founded in Geneva"],["1868","First Swiss wristwatch"],["1925","First wristwatch with perpetual calendar"],["1976","Nautilus by Gerald Genta"],["2014","175th anniversary 5175R"]],
+   signature:"Calatrava"},
+  {name:"Audemars Piguet",year:"1875",country:"Switzerland",heritage:"Founded by Jules Louis Audemars and Edward Auguste Piguet in Le Brassus, Vallée de Joux. The Royal Oak (1972), designed by Gerald Genta, was the first luxury sports watch in steel — priced higher than gold. It created an entire category and remains the brand's icon.",
+   models:["Royal Oak","Royal Oak Offshore","Code 11.59","Jules Audemars","Millenary"],
+   milestones:[["1875","Founded in Le Brassus"],["1972","Royal Oak — steel luxury watch"],["1993","Royal Oak Offshore"],["2019","Code 11.59 collection"]],
+   signature:"Royal Oak"},
+  {name:"Omega",year:"1848",country:"Switzerland",heritage:"Founded by Louis Brandt in La Chaux-de-Fonds. Omega's Speedmaster became the first watch on the Moon (1969) and was NASA-certified for all manned space missions. The Seamaster has been the James Bond watch since 1995.",
+   models:["Speedmaster Moonwatch","Seamaster Diver 300M","Constellation","De Ville Prestige","Aqua Terra"],
+   milestones:[["1848","Founded by Louis Brandt"],["1932","First diving watch"],["1957","Speedmaster launched"],["1969","First watch on the Moon"],["1995","James Bond partnership"]],
+   signature:"Speedmaster"},
+  {name:"Cartier",year:"1847",country:"France",heritage:"Founded by Louis-François Cartier in Paris. A jeweler first and watchmaker second, Cartier created some of the most iconic watch designs in history: the Santos (1904), the Tank (1917), and the Panthère. Worn by royalty, celebrities, and cultural icons.",
+   models:["Tank","Santos","Panthère de Cartier","Ballon Bleu","Calibre de Cartier"],
+   milestones:[["1847","Founded in Paris"],["1904","Santos — first wristwatch for aviator"],["1917","Tank — inspired by WWI Renault tank"],["1983","Panthère de Cartier launched"]],
+   signature:"Panthère de Cartier"},
+  {name:"Vacheron Constantin",year:"1755",country:"Switzerland",heritage:"The oldest continuously operating watch manufacturer, founded by Jean-Marc Vacheron in Geneva. A member of the 'holy trinity' alongside Patek Philippe and Audemars Piguet. Known for the Overseas sports watch and the world's most complicated watch (Reference 57260, 57 complications).",
+   models:["Overseas","Patrimony","Traditionnelle","Historiques","Métiers d'Art"],
+   milestones:[["1755","Founded — oldest watchmaker"],["1880","Maltese cross logo adopted"],["1977","Reference 222 — Overseas predecessor"],["2015","Reference 57260 — 57 complications"]],
+   signature:"Patrimony"},
+  {name:"Jaeger-LeCoultre",year:"1833",country:"Switzerland",heritage:"Founded by Antoine LeCoultre in Le Sentier. Known as the 'watchmaker's watchmaker' — they've produced over 1,200 calibers and supplied movements to Patek Philippe, Cartier, and Vacheron. The Reverso (1931) is the most iconic Art Deco watch ever made.",
+   models:["Reverso","Master Control","Polaris","Atmos","Grande Reverso"],
+   milestones:[["1833","Founded in Le Sentier"],["1931","Reverso — swiveling case for polo"],["1953","Futurematic — first automatic with no crown"],["2007","Gyrotourbillon 1"]],
+   signature:"Reverso"},
+  {name:"IWC",year:"1868",country:"Switzerland",heritage:"Founded by American watchmaker Florentine Ariosto Jones in Schaffhausen, Switzerland. IWC combined Swiss craftsmanship with modern American manufacturing. Known for the Pilot's Watch (Mark series), Portuguese, and the Big Pilot — one of the most recognizable aviator watches.",
+   models:["Pilot's Watch Mark XVIII","Big Pilot","Portugieser","Portofino","Ingenieur"],
+   milestones:[["1868","Founded by American F.A. Jones"],["1936","First Pilot's watch"],["1939","Portuguese — first with pocket watch movement"],["2002","Big Pilot's Watch 5002"]],
+   signature:"Portofino"},
+  {name:"Breitling",year:"1884",country:"Switzerland",heritage:"Founded by Léon Breitling in Saint-Imier. The quintessential aviation watch brand — the Navitimer (1952) with its circular slide rule became the official watch of the Aircraft Owners and Pilots Association. Known for chronographs and the in-house B01 caliber.",
+   models:["Navitimer B01","Chronomat","Superocean Heritage","Avenger","Premier"],
+   milestones:[["1884","Founded by Léon Breitling"],["1923","First independent chronograph pushpiece"],["1952","Navitimer — pilot's chronograph"],["2009","In-house B01 caliber launched"]],
+   signature:"Navitimer"},
+];
+
+const grid=document.getElementById('brands');
+brands.forEach(b=>{
+  const card=document.createElement('div');
+  card.className='brand-card';
+  card.innerHTML=`<h3>${b.name}</h3><div class="meta"><span class="year">Founded ${b.year}</span><span class="country">${b.country}</span></div><p class="heritage">${b.heritage.slice(0,120)}...</p><p class="model">${b.signature}</p><div class="view-detail">View Details →</div>`;
+  card.addEventListener('click',()=>openModal(b));
+  grid.appendChild(card);
+});
+
+const overlay=document.getElementById('modalOverlay');
+const modalBody=document.getElementById('modalBody');
+const modalClose=document.getElementById('modalClose');
+
+function openModal(b){
+  modalBody.innerHTML=`
+    <div class="modal-brand-name">${b.name}</div>
+    <div class="modal-brand-meta"><span class="year">Founded ${b.year}</span><span class="country">${b.country}</span></div>
+    <p class="modal-brand-desc">${b.heritage}</p>
+    <div class="modal-brand-models">
+      <h4>Notable Models</h4>
+      <ul>${b.models.map(m=>`<li>${m}</li>`).join('')}</ul>
+    </div>
+    <div class="modal-brand-milestones">
+      <h4>Key Milestones</h4>
+      ${b.milestones.map(m=>`<div class="milestone"><span class="year">${m[0]}</span><span class="event">${m[1]}</span></div>`).join('')}
+    </div>`;
+  overlay.classList.add('active');
+  document.body.style.overflow='hidden';
+}
+function closeModal(){overlay.classList.remove('active');document.body.style.overflow=''}
+modalClose.addEventListener('click',closeModal);
+overlay.addEventListener('click',e=>{if(e.target===overlay)closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+
+const header=document.getElementById('header');
+window.addEventListener('scroll',()=>{if(window.scrollY>60)header.classList.add('scrolled');else header.classList.remove('scrolled')});
+</script>
+</body>
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ONYX — About</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0a;--surface:#141414;--surface-2:#1a1a1a;--gold:#c9a96e;--gold-dim:#8a7a52;--gold-bright:#e8d5a3;--text:#f5f5f5;--muted:#888;--border:#2a2a2a;--radius:12px;--ease:cubic-bezier(.25,.46,.45,.94)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--gold-dim);border-radius:4px}
+
+header{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.2rem 2rem;background:rgba(10,10,10,.65);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(201,169,110,.12);transition:padding .3s var(--ease)}
+header.scrolled{padding:.8rem 2rem;background:rgba(10,10,10,.92)}
+.nav-container{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:'Playfair Display',serif;font-weight:700;font-size:1.8rem;color:var(--gold);letter-spacing:.35em;text-decoration:none;position:relative}
+.logo::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--gold);transition:width .4s var(--ease)}
+.logo:hover::after{width:100%}
+nav ul{display:flex;gap:2.5rem;list-style:none}
+nav a{color:var(--text);text-decoration:none;font-size:.85rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;position:relative;padding-bottom:4px;transition:color .3s}
+nav a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--gold);transition:width .35s var(--ease)}
+nav a:hover{color:var(--gold)}nav a:hover::after{width:100%}
+
+.hero{padding:10rem 2rem 2rem;max-width:1400px;margin:0 auto;text-align:center}
+.hero .eyebrow{font-size:.8rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;font-weight:500}
+.hero h1{font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(2.5rem,6vw,4rem);background:linear-gradient(180deg,#f5f5f5 0%,#c9a96e 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:1rem}
+.gold-line{width:100px;height:2px;margin:1.5rem auto;position:relative;overflow:hidden}
+.gold-line::after{content:'';position:absolute;top:0;left:-60%;width:60%;height:100%;background:linear-gradient(90deg,transparent,#fff,transparent);animation:sweepLine 3s infinite ease-in-out}
+@keyframes sweepLine{0%{left:-60%}100%{left:100%}}
+
+/* About headline — gold gradient sweep like other pages */
+.hero h1{font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(2.5rem,6vw,4rem);background:linear-gradient(180deg,#f5f5f5 0%,#c9a96e 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:1rem}
+.hero p{font-size:1.1rem;color:var(--muted);max-width:560px;margin:0 auto}
+
+/* Tab system */
+.tabs{max-width:1400px;margin:0 auto;padding:1rem 2rem 0;display:flex;justify-content:center;gap:.5rem}
+.tab-btn{padding:.6rem 1.8rem;background:transparent;border:1px solid var(--border);color:var(--muted);font-family:'Inter',sans-serif;font-size:.75rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;border-radius:var(--radius);cursor:pointer;transition:all .3s var(--ease)}
+.tab-btn:hover{color:var(--text);border-color:var(--gold-dim)}
+.tab-btn.active{color:var(--gold);border-color:var(--gold);background:rgba(201,169,110,.08)}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+/* About tab */
+.story{max-width:800px;margin:0 auto;padding:3rem 2rem}
+.story p{color:var(--muted);line-height:1.9;margin-bottom:1.2rem;font-size:1.05rem}
+.story p strong{color:var(--gold);font-weight:500}
+.story .quote{font-family:'Playfair Display',serif;font-style:italic;font-size:1.4rem;color:var(--gold-bright);text-align:center;padding:2rem 0;margin:2rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);line-height:1.5}
+
+.values{max-width:1400px;margin:0 auto;padding:3rem 2rem}
+.values h2{font-family:'Playfair Display',serif;font-size:2rem;font-weight:600;text-align:center;margin-bottom:.5rem}
+.values .sub{text-align:center;color:var(--muted);margin-bottom:3rem}
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:900px;margin:0 auto}
+.value-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;transition:all .3s var(--ease)}
+.value-card:hover{border-color:var(--gold-dim);transform:translateY(-4px)}
+.value-card .icon{font-size:1.8rem;color:var(--gold);margin-bottom:.75rem}
+.value-card h3{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:600;margin-bottom:.5rem}
+.value-card p{color:var(--muted);font-size:.9rem;line-height:1.7}
+
+.timeline{max-width:800px;margin:0 auto;padding:3rem 2rem}
+.timeline h2{font-family:'Playfair Display',serif;font-size:2rem;font-weight:600;text-align:center;margin-bottom:.5rem}
+.timeline .sub{text-align:center;color:var(--muted);margin-bottom:3rem}
+.timeline-item{display:flex;gap:2rem;padding-bottom:2rem;position:relative}
+.timeline-item::before{content:'';position:absolute;left:40px;top:50px;bottom:0;width:1px;background:var(--border)}
+.timeline-item:last-child::before{display:none}
+.timeline-year{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--gold);min-width:80px;text-align:right}
+.timeline-content{padding-left:1rem}
+.timeline-content h3{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:600;margin-bottom:.25rem}
+.timeline-content p{color:var(--muted);font-size:.9rem;line-height:1.7}
+
+.stats{max-width:1400px;margin:0 auto;padding:3rem 2rem}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1.5rem;max-width:800px;margin:0 auto}
+.stat{text-align:center;padding:2rem 1rem;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);transition:all .3s}
+.stat:hover{border-color:var(--gold-dim);transform:translateY(-4px)}
+.stat-number{font-family:'Playfair Display',serif;font-size:3rem;font-weight:700;color:var(--gold);display:block;margin-bottom:.5rem}
+.stat-label{font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+
+.cta{max-width:600px;margin:0 auto;padding:4rem 2rem;text-align:center}
+.cta h2{font-family:'Playfair Display',serif;font-size:2rem;font-weight:600;margin-bottom:.75rem}
+.cta p{color:var(--muted);margin-bottom:2rem}
+.cta-btn{display:inline-flex;padding:1rem 2.5rem;background:transparent;border:1px solid var(--gold);color:var(--gold);font-size:.85rem;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;font-weight:500;position:relative;overflow:hidden;transition:color .4s var(--ease)}
+.cta-btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:var(--gold);transition:left .4s var(--ease);z-index:-1}
+.cta-btn:hover{color:var(--bg)}
+.cta-btn:hover::before{left:0}
+.cta-btn span{position:relative;z-index:1}
+
+/* Tabs */
+.tabs{display:none}
+
+footer{border-top:1px solid rgba(201,169,110,.15);padding:3rem 2rem 2rem;margin-top:2rem}
+.footer-content{max-width:1400px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:2rem}
+.footer-brand{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--gold);letter-spacing:.3em}
+.footer-links{display:flex;gap:2rem;list-style:none}
+.footer-links a{color:var(--muted);text-decoration:none;font-size:.8rem;letter-spacing:.15em;text-transform:uppercase;transition:color .3s}
+.footer-links a:hover{color:var(--gold)}
+.footer-copy{text-align:center;color:var(--muted);font-size:.75rem;margin-top:2rem;padding-top:2rem;border-top:1px solid var(--border);max-width:1400px;margin-left:auto;margin-right:auto}
+
+@media(max-width:768px){nav ul{display:none}.values-grid{grid-template-columns:1fr}.stats-grid{grid-template-columns:1fr}.timeline-item{flex-direction:column;gap:.5rem}.timeline-item::before{display:none}}
+</style>
+</head>
+<body>
+
+<header id="header">
+  <div class="nav-container">
+    <a href="index.html" class="logo">ONYX</a>
+    <nav><ul>
+      <li><a href="index.html#collection">Collection</a></li>
+      <li><a href="brands.html">Maisons</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="journey.html">Journey</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul></nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="eyebrow">Our Story</div>
+  <h1>A Passion Born from Precision</h1>
+  <div class="gold-line"></div>
+  <p>ONYX was founded on a simple belief: that a great watch is more than a timekeeper — it is a legacy worn on the wrist.</p>
+</section>
+
+<!-- ABOUT CONTENT -->
+<div class="tab-panel active" id="about">
+  <section class="story">
+    <p>Every great collection begins with a single moment of fascination. For our founder, it was the sight of a mechanical movement beating at 28,800 vibrations per hour — a tiny engine of <strong>gears, springs, and jeweled bearings</strong> working in perfect harmony, powered by nothing but tension and time.</p>
+    <p>That fascination became a pursuit. The pursuit became ONYX — a curated house for the world's most extraordinary timepieces. We don't just sell watches. We <strong>study them, preserve them, and match them</strong> with the people who will wear them with intention.</p>
+    <div class="quote">"A watch is the only mechanical object you can carry with you every day, pass to your child, and know it will still be ticking a hundred years from now."</div>
+    <p>From the dive watches that conquered the ocean depths to the chronographs that measured the speed of light, every timepiece in our collection has earned its place through <strong>heritage, craftsmanship, and cultural significance</strong>. We travel to Geneva, Le Brassus, and Le Sentier to source directly from maisons and trusted collectors.</p>
+    <p>Whether you're acquiring your first serious timepiece or adding the final piece to a decades-long collection, ONYX is your guide to the world of <strong>haute horlogerie</strong> — with honesty, expertise, and an unwavering respect for the craft.</p>
+  </section>
+
+  <section class="values">
+    <h2>What We Believe</h2>
+    <p class="sub">Three principles that guide every decision we make.</p>
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="icon">◇</div>
+        <h3>Authenticity</h3>
+        <p>Every piece is verified by certified watchmakers. No replicas, no frankenwatches, no compromises. Provenance matters as much as the watch itself.</p>
+      </div>
+      <div class="value-card">
+        <div class="icon">◆</div>
+        <h3>Expertise</h3>
+        <p>Decades of combined experience in horology, from movement servicing to market analysis. We share our knowledge openly — because an informed collector makes better decisions.</p>
+      </div>
+      <div class="value-card">
+        <div class="icon">◈</div>
+        <h3>Relationship</h3>
+        <p>We're not a marketplace. We're a partner. From first purchase to eventual trade, we're here for the long journey — not the single transaction.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="timeline">
+    <h2>A Brief History of Timekeeping</h2>
+    <p class="sub">The milestones that shaped the watches we love today.</p>
+    <div class="timeline-item">
+      <div class="timeline-year">1755</div>
+      <div class="timeline-content"><h3>Vacheron Constantin Founded</h3><p>The oldest continuously operating watch manufacturer, established by Jean-Marc Vacheron in Geneva.</p></div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">1839</div>
+      <div class="timeline-content"><h3>Patek Philippe Established</h3><p>Antoine Norbert de Patek founds what would become the pinnacle of grand complications.</p></div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">1875</div>
+      <div class="timeline-content"><h3>Audemars Piguet Born</h3><p>Jules Louis Audemars and Edward Auguste Piguet begin their partnership in Le Brassus.</p></div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">1905</div>
+      <div class="timeline-content"><h3>Rolex Founded</h3><p>Hans Wilsdorf creates the brand that would make wristwatches respectable and reliable.</p></div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">1931</div>
+      <div class="timeline-content"><h3>The Reverso Invented</h3><p>Jaeger-LeCoultre creates a swiveling case for polo players — an Art Deco icon is born.</p></div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">1969</div>
+      <div class="timeline-content"><h3>El Primero & The Moon</h3><p>Zenith launches the first automatic chronograph. Omega's Speedmaster lands on the Moon.</p></div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">1972</div>
+      <div class="timeline-content"><h3>The Royal Oak Revolution</h3><p>Gerald Genta designs a steel luxury watch priced higher than gold. The luxury sports watch category is born.</p></div>
+    </div>
+  </section>
+
+  <section class="stats">
+    <div class="stats-grid">
+      <div class="stat"><span class="stat-number">12</span><span class="stat-label">Iconic Pieces</span></div>
+      <div class="stat"><span class="stat-number">9</span><span class="stat-label">Maisons</span></div>
+      <div class="stat"><span class="stat-number">271</span><span class="stat-label">Years of Heritage</span></div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <h2>Begin Your Collection</h2>
+    <p>Explore our curated timepieces or schedule a private consultation.</p>
+    <a href="index.html#collection" class="cta-btn"><span>Explore Collection</span></a>
+  </section>
+</div>
+
+<footer>
+  <div class="footer-content">
+    <div class="footer-brand">ONYX</div>
+    <ul class="footer-links">
+      <li><a href="index.html">Collection</a></li>
+      <li><a href="brands.html">Maisons</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="journey.html">Journey</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+  <div class="footer-copy">© 2026 ONYX. Curated horology for the discerning. All brand names and trademarks belong to their respective owners.</div>
+</footer>
+
+<script>
+const header=document.getElementById('header');
+window.addEventListener('scroll',()=>{if(window.scrollY>60)header.classList.add('scrolled');else header.classList.remove('scrolled')});
+
+// Tab switching (disabled — contact tab removed)
+// Support #contact hash removed
+</script>
+</body>
+</html>
