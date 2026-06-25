@@ -1,5 +1,7 @@
 # ONYX — Curated Horology
 
+![ONYX Hero](images/onyx-hero.png)
+
 A luxury watch showcase website featuring 12 iconic timepieces from 9 legendary maisons.
 
 ## Pages
